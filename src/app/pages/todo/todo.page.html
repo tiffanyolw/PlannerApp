@@ -1,0 +1,23 @@
+<ion-header>
+    <app-headerbar [title]="title"></app-headerbar>
+</ion-header>
+
+<ion-content>
+    <ion-list lines="full">
+        <ion-item *ngFor="let todo of todoList">
+            <ion-label [class.completed]="isCompleted(todo)" text-wrap>
+                <h2>{{ todo.name }}</h2>
+                <h4>From: {{ todo.startDate | date:"MMM d, y h:mm a"}}</h4> 
+                <h4>To: {{ todo.endDate | date:"MMM d, y h:mm a"}}</h4>
+                <p>{{ todo.description }}</p>
+            </ion-label>
+            <ion-checkbox slot="start" color="success" [checked]="isCompleted(todo)" (ionChange)="toggleStatus(todo)"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add" routerLink="/todo/add-task"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Task } from 'src/app/interfaces/task';
+import { TasksService } from 'src/app/services/Tasks.service';
+import { convertDateTime } from 'src/app/functions/date';
+
+@Component({
+  selector: 'app-add-task',
+  templateUrl: './add-task.page.html',
+  styleUrls: ['./add-task.page.scss'],
+})
+export class AddTaskPage implements OnInit {
+  title: string = "Add Task";
+  addTaskForm: FormGroup = this.builder.group({
+    title: ["", [Validators.required]],
+    description: ["", [Validators.required]],
+    startDate: ["", [Validators.required]],
+    startTime: ["", [Validators.required]],
+    endDate: ["", [Validators.required]],
+    endTime: ["", [Validators.required]],
+    status: ["Incomplete", [Validators.required]]
+  });
+
+  constructor(private service: TasksService, private builder: FormBuilder) { }
+
+  onSubmit() {
+    const form = this.addTaskForm.value;
+    let newTask: Task = {
+      id: Math.random(),
+      name: form.title,
+      description: form.description,
+      startDate: convertDateTime(form.startDate, form.startTime),
+      endDate: convertDateTime(form.endDate, form.endTime),
+      status: form.status
+    };
+
+    console.log(newTask);
+    const added = this.service.addTask(newTask);
+    if (added) {
+      //show toast
+    } else {
+      // show toast
+    }
+
+    this.addTaskForm.reset();
+  }
+
+  ngOnInit() {
+  }
+
+}

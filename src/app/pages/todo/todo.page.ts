@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { Status, Task } from 'src/app/interfaces/task';
+import { Task } from 'src/app/interfaces/task';
+import { Status } from 'src/app/interfaces/Status';
 import { TasksService } from 'src/app/services/Tasks.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class TodoPage implements OnInit {
     this.todoList = service.getTasks();
   }
 
-  private async showToggleStatusToast(message: string) {
+  private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
       message,
       duration: 2000
@@ -26,14 +27,14 @@ export class TodoPage implements OnInit {
     toast.present();
   }
 
-  isCompleted(todo): boolean {
+  isCompleted(todo: Task): boolean {
     if (todo.status === Status.Complete) {
       return true;
     }
     return false;
   }
   
-  toggleStatus(todo) {
+  toggleStatus(todo: Task) {
     let msg = "";
     if (todo.status === Status.Complete) {
       todo.status = Status.Incomplete;
@@ -43,7 +44,7 @@ export class TodoPage implements OnInit {
       msg = "Task has been marked as complete.";
     }
 
-    this.showToggleStatusToast(msg);
+    this.showToast(msg);
   }
 
   ngOnInit() { }

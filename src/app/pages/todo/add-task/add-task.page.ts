@@ -13,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 export class AddTaskPage implements OnInit {
   title: string = "Add Task";
   addTaskForm: FormGroup = this.builder.group({
-    title: ["", [Validators.required]],
+    name: ["", [Validators.required]],
     description: ["", [Validators.required]],
     startDate: ["", [Validators.required]],
     startTime: ["", [Validators.required]],
@@ -36,8 +36,7 @@ export class AddTaskPage implements OnInit {
   onSubmit() {
     const form = this.addTaskForm.value;
     let newTask: Task = {
-      id: Math.random(),
-      name: form.title,
+      name: form.name,
       description: form.description,
       startDate: convertDateTime(form.startDate, form.startTime),
       endDate: convertDateTime(form.endDate, form.endTime),

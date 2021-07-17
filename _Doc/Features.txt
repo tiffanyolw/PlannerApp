@@ -1,9 +1,9 @@
 TODO:
-- Toast marking complete and incomplete
+- Toast marking complete
 
 Add Task:
 - Back button goes back to todo
-- Button disabled if not completed
+- Required, Button disabled if not completed
 - Status is Incomplete by default
 - Toast showing added or not added
 - Automatically closes add task after clicking submit
@@ -13,5 +13,15 @@ Goals:
 - Same as TODO
 
 Achievements:
+- Did using cards like the assignment said at first but changed to list because it looks better
 - Ordered by latest end date
 - Achievements have trophy icon, tasks have checkbox icon
+
+
+Note:
+
+Add Note:
+- Back button
+- all required, button disabled
+- Toast showing added or not
+- Add note automatically redirects back to notes

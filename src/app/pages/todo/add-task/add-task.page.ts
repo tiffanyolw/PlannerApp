@@ -35,7 +35,7 @@ export class AddTaskPage implements OnInit {
 
   onSubmit() {
     const form = this.addTaskForm.value;
-    let newTask: Task = {
+    const newTask: Task = {
       name: form.name,
       description: form.description,
       startDate: convertDateTime(form.startDate, form.startTime),
@@ -43,7 +43,6 @@ export class AddTaskPage implements OnInit {
       status: form.status
     };
 
-    console.log(newTask);
     const added = this.service.addTask(newTask);
     if (added) {
       this.showToast("Task successfully added");

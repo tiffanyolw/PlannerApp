@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Status } from 'src/app/interfaces/Status';
-import { Task } from 'src/app/interfaces/task';
 import { GoalsService } from 'src/app/services/goals.service';
 import { TasksService } from 'src/app/services/Tasks.service';
 

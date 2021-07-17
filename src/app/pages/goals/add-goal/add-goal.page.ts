@@ -35,7 +35,7 @@ export class AddGoalPage implements OnInit {
 
   onSubmit() {
     const form = this.addGoalForm.value;
-    let newGoal: Goal = {
+    const newGoal: Goal = {
       name: form.name,
       description: form.description,
       startDate: convertDateTime(form.startDate, form.startTime),
@@ -43,7 +43,6 @@ export class AddGoalPage implements OnInit {
       status: form.status
     };
 
-    console.log(newGoal);
     const added = this.service.addGoal(newGoal);
     if (added) {
       this.showToast("Goal successfully added");

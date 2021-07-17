@@ -1,0 +1,17 @@
+TODO:
+- Toast marking complete and incomplete
+
+Add Task:
+- Back button goes back to todo
+- Button disabled if not completed
+- Status is Incomplete by default
+- Toast showing added or not added
+- Automatically closes add task after clicking submit
+
+
+Goals:
+- Same as TODO
+
+Achievements:
+- Ordered by latest end date
+- Achievements have trophy icon, tasks have checkbox icon

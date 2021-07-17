@@ -28,10 +28,7 @@ export class GoalsPage implements OnInit {
   }
 
   isCompleted(goal: Goal): boolean {
-    if (goal.status === Status.Complete) {
-      return true;
-    }
-    return false;
+    return goal.status === Status.Complete;
   }
 
   toggleStatus(goal: Goal) {

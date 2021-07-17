@@ -28,10 +28,7 @@ export class TodoPage implements OnInit {
   }
 
   isCompleted(todo: Task): boolean {
-    if (todo.status === Status.Complete) {
-      return true;
-    }
-    return false;
+    return todo.status === Status.Complete;
   }
   
   toggleStatus(todo: Task) {

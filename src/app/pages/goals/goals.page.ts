@@ -11,11 +11,12 @@ import { GoalsService } from 'src/app/services/goals.service';
 })
 export class GoalsPage implements OnInit {
   title: string = "Goals";
+  showAll: boolean = false;
 
   goalsList: Goal[] = [];
 
   constructor(private service: GoalsService, private toastCtrl: ToastController) {
-    this.goalsList = service.getGoals();
+    this.goalsList = service.getGoalsByStatus(Status.Incomplete);
   }
 
   private async showToast(message: string) {
@@ -25,6 +26,15 @@ export class GoalsPage implements OnInit {
     });
 
     toast.present();
+  }
+
+  toggleShowAll() {
+    this.showAll = !this.showAll;
+    if (this.showAll) {
+      this.goalsList = this.service.getGoals();
+    } else {
+      this.goalsList = this.service.getGoalsByStatus(Status.Incomplete);
+    }
   }
 
   isCompleted(goal: Goal): boolean {

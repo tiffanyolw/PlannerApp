@@ -1,5 +1,8 @@
 TODO:
-- Toast marking complete
+- will show only incomplete tasks
+- once checked, navigate off and back on will show task gone
+- show all toggle to show all tasks or only the incomplete tasks
+- Toast marking complete and incomplete
 
 Add Task:
 - Back button goes back to todo

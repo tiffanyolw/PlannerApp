@@ -3,5 +3,28 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="addNoteForm">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Header</ion-label>
+      <ion-input formControlName="header"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Details</ion-label>
+      <ion-textarea formControlName="details"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Importance</ion-label>
+      <ion-select formControlName="importance">
+        <ion-select-option value="Not Important">Not Important</ion-select-option>
+        <ion-select-option value="Important">Important</ion-select-option>
+        <ion-select-option value="Very Important">Very Important</ion-select-option>
+      </ion-select>
+    </ion-item>
 
+    <ion-button (click)="onSubmit()" [disabled]="addNoteForm.invalid" routerLink="/notes">Submit</ion-button>
+  </form>
 </ion-content>

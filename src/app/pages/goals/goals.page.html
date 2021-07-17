@@ -3,5 +3,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-list lines="full">
+    <ion-item *ngFor="let goal of goalsList">
+      <ion-label [class.completed]="isCompleted(goal)" text-wrap>
+        <h2>{{ goal.name }}</h2>
+        <h4>From: {{ goal.startDate | date:"MMM d, y h:mm a" }}</h4>
+        <h4>To: {{ goal.endDate | date:"MMM d, y h:mm a" }}</h4>
+        <p>{{ goal.description }}</p>
+      </ion-label>
+      <ion-checkbox slot="start" color="primary" [checked]="isCompleted(goal)" (ionChange)="toggleStatus(goal)">
+      </ion-checkbox>
+    </ion-item>
+  </ion-list>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add" routerLink="/goals/add-goal"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

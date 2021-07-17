@@ -1,13 +1,16 @@
 TODO:
 - will show only incomplete tasks
 - once checked, navigate off and back on will show task gone
+- when checked, end date is set to current day and time
 - show all toggle to show all tasks or only the incomplete tasks
+- Will only show "to" date if the task is completed
 - Toast marking complete and incomplete
 
 Add Task:
 - Back button goes back to todo
-- Required, Button disabled if not completed
+- Required except endDate and endTime, Button disabled if not completed
 - Status is Incomplete by default
+- If endDate and time are not specified, status cannot be changed to complete
 - Toast showing added or not added
 - Automatically closes add task after clicking submit
 

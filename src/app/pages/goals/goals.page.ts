@@ -48,9 +48,11 @@ export class GoalsPage implements OnInit {
       msg = "Goal has been marked as incomplete.";;
     } else {
       goal.status = Status.Complete;
+      goal.endDate = new Date(Date.now());
       msg = "Goal has been marked as complete.";
     }
-
+    
+    this.service.updateGoal(goal);
     this.showToast(msg);
   }
 

@@ -13,7 +13,7 @@
             <ion-label [class.completed]="isCompleted(task)" text-wrap>
                 <h2>{{ task.name }}</h2>
                 <h4>From: {{ task.startDate | date:"MMM d, y h:mm a" }}</h4>
-                <h4>To: {{ task.endDate | date:"MMM d, y h:mm a" }}</h4>
+                <h4 *ngIf="isCompleted(task)">To: {{ task.endDate | date:"MMM d, y h:mm a" }}</h4>
                 <p>{{ task.description }}</p>
             </ion-label>
             <ion-checkbox slot="start" color="primary" [checked]="isCompleted(task)" (ionChange)="toggleStatus(task)">

@@ -48,9 +48,11 @@ export class TodoPage implements OnInit {
       msg = "Task has been marked as incomplete.";;
     } else {
       todo.status = Status.Complete;
+      todo.endDate = new Date(Date.now());
       msg = "Task has been marked as complete.";
     }
-
+    
+    this.service.updateTask(todo);
     this.showToast(msg);
   }
 

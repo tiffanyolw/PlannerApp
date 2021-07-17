@@ -4,7 +4,7 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Planner</ion-list-header>
-          <ion-note>Track your to-dos and goals!</ion-note>
+          <ion-note>Track your to-do tasks and goals!</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"

@@ -33,4 +33,12 @@ export class TasksService {
     return true;
     // return false if db couldn't add
   }
+
+  updateTask(task: Task) {
+    const index = this.todoList.findIndex((todo) => {
+      return todo.id === task.id;
+    });
+
+    this.todoList[index] = task;
+  }
 }

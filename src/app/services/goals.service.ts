@@ -33,4 +33,12 @@ export class GoalsService {
     return true;
     // return false if db couldn't add
   }
+
+  updateGoal(goal: Goal) {
+    const index = this.goalsList.findIndex((obj) => {
+      return obj.id === goal.id;
+    });
+
+    this.goalsList[index] = goal;
+  }
 }

@@ -57,7 +57,16 @@ https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-locat
 - When Submit button is clicked, the Add Note page automatically closes and shows the Notes page
 
 # To Do
+- Video Diary and Images Diary
 - Ability to update/edit a task, goal, or note
 - Ability to delete a task, goal, or note
   - Set a delete flag and show deleted items in a seperate list when user can permanently delete the item
 - Handle error responses from the API (instead of just console.log the error)
+- Create option to sort by
+- Save preferences
+
+## Refactoring
+Branch: refactor
+- (/) Put add task and add goal form into a separate component (use event emitter)
+- ( ) Put todo and goals list into a separate component
+- ( ) Create custom pipes for the date and time format

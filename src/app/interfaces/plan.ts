@@ -1,10 +1,13 @@
-import { Plan, Status } from "./plan";
-
-export interface Goal extends Plan{
+export interface Plan {
     id?: number,
     name: string,
     description: string,
     startDate: Date,
     endDate: Date,
     status: Status
+}
+
+export enum Status {
+    Complete = "Complete",
+    Incomplete = "Incomplete"
 }

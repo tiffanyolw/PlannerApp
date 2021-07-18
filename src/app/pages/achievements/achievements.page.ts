@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Status } from 'src/app/interfaces/Status';
+import { Plan, Status } from 'src/app/interfaces/plan';
 import { GoalsService } from 'src/app/services/goals.service';
 import { TasksService } from 'src/app/services/Tasks.service';
 
@@ -11,13 +11,13 @@ import { TasksService } from 'src/app/services/Tasks.service';
 export class AchievementsPage implements OnInit {
   title: string = "Achievements";
 
-  achievements = [];
+  achievements: Plan[] = [];
 
   constructor(private tasksService: TasksService, private goalsService: GoalsService) { }
 
   private sortDesc() {
     this.achievements.sort((obj1, obj2) => {
-      return obj2.endDate - obj1.endDate;
+      return new Date(obj2.endDate).getTime() - new Date(obj1.endDate).getTime();
     });
   }
 
@@ -32,6 +32,7 @@ export class AchievementsPage implements OnInit {
   ionViewWillEnter() {
     let tasks = [];
     let goals = [];
+
     this.tasksService.getTasksByStatus(Status.Complete).subscribe((result) => {
       tasks = result;
       tasks.forEach((task) => {
@@ -43,6 +44,7 @@ export class AchievementsPage implements OnInit {
     }, (err) => {
       console.log(err);
     });
+
     this.goalsService.getGoalsByStatus(Status.Complete).subscribe((result) => {
       goals = result;
       goals.forEach((goal) => {

@@ -28,13 +28,13 @@ export class GoalsPage implements OnInit {
 
   private showGoals() {
     if (this.showAll) {
-      this.service.getGoals().subscribe((result) => {
+      this.service.getGoals("createdAt", "DESC").subscribe((result) => {
         this.goalsList = result;
       }, (err) => {
         console.log(err);
       });
     } else {
-      this.service.getGoalsByStatus(Status.Incomplete).subscribe((result) => {
+      this.service.getGoalsByStatus(Status.Incomplete, "createdAt", "DESC").subscribe((result) => {
         this.goalsList = result;
       }, (err) => {
         console.log(err);

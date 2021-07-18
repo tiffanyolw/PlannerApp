@@ -14,7 +14,7 @@ export class NotesPage implements OnInit {
   constructor(private service: NotesService) { }
 
   ionViewWillEnter() {
-    this.service.getNotes().subscribe((result) => {
+    this.service.getNotes("updatedAt", "DESC").subscribe((result) => {
       this.notesList = result;
     }, (err) => {
       console.log(err);

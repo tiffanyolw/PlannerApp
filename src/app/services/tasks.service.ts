@@ -1,44 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../interfaces/task';
 import { Status } from '../interfaces/Status';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-  todoList: Task[] = [
-    { id: 1, name: "Running", description: "running around the block", startDate: new Date(), endDate: new Date(2020, 9, 9), status: Status.Incomplete },
-    { id: 2, name: "Running2", description: "running around the block2", startDate: new Date(), endDate: new Date(2015, 5, 5), status: Status.Incomplete },
-    { id: 3, name: "Running3", description: "running around the block3", startDate: new Date(), endDate: new Date(2017, 2, 2), status: Status.Complete },
-  ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getTasks(): Task[] {
-    return this.todoList;
+  getTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${environment.apiUrl}/tasks`);
   }
 
-  getTasksByStatus(status: Status): Task[] {
-    let list = [];
-    this.todoList.forEach((task) => {
-      if (task.status === status) {
-        list.push(task);
-      }
-    });
-    return list;
+  getTasksByStatus(status: Status): Observable<Task[]> {
+    return this.http.get<Task[]>(`${environment.apiUrl}/tasks/filter?status=${status}`);
   }
 
-  addTask(task: Task): boolean {
-    this.todoList.push(task);
-    return true;
-    // return false if db couldn't add
+  addTask(body: Task): Observable<Object> {
+    return this.http.post(`${environment.apiUrl}/tasks/create`, body);;
   }
 
-  updateTask(task: Task) {
-    const index = this.todoList.findIndex((todo) => {
-      return todo.id === task.id;
-    });
-
-    this.todoList[index] = task;
+  updateTask(id: number, body: Task): Observable<Object> {
+    return this.http.put(`${environment.apiUrl}/tasks/update/id/${id}`, body);
   }
 }

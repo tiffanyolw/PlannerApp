@@ -38,12 +38,11 @@ export class AddNotePage implements OnInit {
       importance: form.importance
     };
 
-    const added = this.service.addNote(newNote);
-    if (added) {
+    this.service.addNote(newNote).subscribe(() => {
       this.showToast("Note successfully added");
-    } else {
-      this.showToast("Failure: Note could not be added");
-    }
+    }, () => {
+      this.showToast("Error: Note could not be added");
+    });
 
     this.addNoteForm.reset();
   }

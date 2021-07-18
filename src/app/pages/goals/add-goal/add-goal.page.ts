@@ -47,7 +47,7 @@ export class AddGoalPage implements OnInit {
     if (added) {
       this.showToast("Goal successfully added");
     } else {
-      this.showToast("Failure: Goal could not be added");
+      this.showToast("Error: Goal could not be added");
     }
 
     this.addGoalForm.reset();

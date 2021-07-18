@@ -12,12 +12,20 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(`${environment.apiUrl}/tasks`);
+  getTasks(orderby?: string, order?: string): Observable<Task[]> {
+    const orderQuery1 = orderby ? `?orderby=${orderby}` : "";
+    const orderQuery2 = order ? `&order=${order}` : "";
+    const orderQuery = orderby ? orderQuery1 + orderQuery2 : "";
+
+    return this.http.get<Task[]>(`${environment.apiUrl}/tasks${orderQuery}`);
   }
 
-  getTasksByStatus(status: Status): Observable<Task[]> {
-    return this.http.get<Task[]>(`${environment.apiUrl}/tasks/filter?status=${status}`);
+  getTasksByStatus(status: Status, orderby?: string, order?:string): Observable<Task[]> {
+    const orderQuery1 = orderby ? `&orderby=${orderby}` : "";
+    const orderQuery2 = order ? `&order=${order}` : "";
+    const orderQuery = orderby ? orderQuery1 + orderQuery2 : "";
+
+    return this.http.get<Task[]>(`${environment.apiUrl}/tasks/filter?status=${status}${orderQuery}`);
   }
 
   addTask(body: Task): Observable<Object> {

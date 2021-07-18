@@ -43,12 +43,11 @@ export class AddGoalPage implements OnInit {
       status: form.status
     };
 
-    const added = this.service.addGoal(newGoal);
-    if (added) {
+    this.service.addGoal(newGoal).subscribe((result) => {
       this.showToast("Goal successfully added");
-    } else {
+    }, () => {
       this.showToast("Error: Goal could not be added");
-    }
+    });
 
     this.addGoalForm.reset();
   }

@@ -16,6 +16,7 @@
 # Functionality
 ## To Do
 - Will show only incomplete tasks by default
+- Will show tasks sorted by created date from latest to oldest
 - A toast will appear when checking (or unchecking in Show All list) a task
 - When a task is checked, it will still appear in the list, but navigating off and back onto the page
 - When a task is checked, the endDate is set to the current date and time
@@ -38,10 +39,12 @@
 - Same functionality as Add Task page
 
 ## Achievements
-- Order by date in descending order (latest date at the top)
+- Order by date in descending order (latest to oldest)
 - Achievements have a flag icon, tasks have a checkbox icon
 
 ## Notes
+- Will show notes sorted by updated date from latest to oldest
+
 
 ### Add Note
 - Back button goes back to Notes page

@@ -11,8 +11,12 @@ export class NotesService {
 
   constructor(private http:HttpClient) { }
 
-  getNotes(): Observable<Note[]> {
-    return this.http.get<Note[]>(`${environment.apiUrl}/notes`);
+  getNotes(orderby?: string, order?: string): Observable<Note[]> {
+    const orderQuery1 = orderby ? `?orderby=${orderby}` : "";
+    const orderQuery2 = order ? `&order=${order}` : "";
+    const orderQuery = orderby ? orderQuery1 + orderQuery2 : "";
+
+    return this.http.get<Note[]>(`${environment.apiUrl}/notes${orderQuery}`);
   }
 
   addNote(body: Note): Observable<Object> {

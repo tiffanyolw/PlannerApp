@@ -28,13 +28,13 @@ export class TodoPage implements OnInit {
 
   private showTasks() {
     if (this.showAll) {
-      this.service.getTasks().subscribe((result) => {
+      this.service.getTasks("createdAt", "DESC").subscribe((result) => {
         this.todoList = result;
       }, (err) => {
         console.log(err);
       });
     } else {
-      this.service.getTasksByStatus(Status.Incomplete).subscribe((result) => {
+      this.service.getTasksByStatus(Status.Incomplete, "createdAt", "DESC").subscribe((result) => {
         this.todoList = result;
       }, (err) => {
         console.log(err);

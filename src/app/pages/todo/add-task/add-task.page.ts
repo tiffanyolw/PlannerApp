@@ -46,7 +46,7 @@ export class AddTaskPage implements OnInit {
     this.service.addTask(newTask).subscribe(() => {
       this.showToast("Task successfully added");
     }, () => {
-      this.showToast("Failure: Task could not be added");
+      this.showToast("Error: Task could not be added");
     });
 
     this.addTaskForm.reset();

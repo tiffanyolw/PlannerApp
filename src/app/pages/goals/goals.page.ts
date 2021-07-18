@@ -65,7 +65,7 @@ export class GoalsPage implements OnInit {
     this.service.updateGoal(goal.id, goal).subscribe(() => {
       this.showToast(msg);
     }, () => {
-      this.showToast("Could not update status");
+      this.showToast("Error: Could not update status");
     });
   }
 

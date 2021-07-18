@@ -65,7 +65,7 @@ export class TodoPage implements OnInit {
     this.service.updateTask(todo.id, todo).subscribe(() => {
       this.showToast(msg);
     }, () => {
-      this.showToast("Could not update status");
+      this.showToast("Error: Could not update status");
     });
   }
 

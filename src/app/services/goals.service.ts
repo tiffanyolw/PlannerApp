@@ -12,12 +12,20 @@ export class GoalsService {
 
   constructor(private http: HttpClient) { }
 
-  getGoals(): Observable<Goal[]> {
-    return this.http.get<Goal[]>(`${environment.apiUrl}/goals`);
+  getGoals(orderby?: string, order?: string): Observable<Goal[]> {
+    const orderQuery1 = orderby ? `?orderby=${orderby}` : "";
+    const orderQuery2 = order ? `&order=${order}` : "";
+    const orderQuery = orderby ? orderQuery1 + orderQuery2 : "";
+
+    return this.http.get<Goal[]>(`${environment.apiUrl}/goals${orderQuery}`);
   }
 
-  getGoalsByStatus(status: Status): Observable<Goal[]> {
-    return this.http.get<Goal[]>(`${environment.apiUrl}/goals/filter?status=${status}`);
+  getGoalsByStatus(status: Status, orderby?: string, order?:string): Observable<Goal[]> {
+    const orderQuery1 = orderby ? `&orderby=${orderby}` : "";
+    const orderQuery2 = order ? `&order=${order}` : "";
+    const orderQuery = orderby ? orderQuery1 + orderQuery2 : "";
+
+    return this.http.get<Goal[]>(`${environment.apiUrl}/goals/filter?status=${status}${orderQuery}`);
   }
 
   addGoal(body: Goal): Observable<Object> {

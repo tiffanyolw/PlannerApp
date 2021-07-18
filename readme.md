@@ -5,6 +5,10 @@
 4. `ionic serve` will run app in the browser
 5. `ionic cap run android` will run the app on an emulator/physical device
 
+# Fix Errors
+- If error with SDK location not found, add a file in android folder named `local.properties` and add `sdk.dir=C:\\Users\\Username\\AppData\\Local\\Android\\sdk` to the file
+https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil
+
 # Info
 - To Do List page, which should be updated weekly.
 - Goals page, which should be updated monthly.

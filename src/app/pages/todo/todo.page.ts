@@ -15,9 +15,7 @@ export class TodoPage implements OnInit {
 
   todoList: Task[] = [];
 
-  constructor(private service: TasksService, private toastCtrl: ToastController) {
-    this.todoList = service.getTasksByStatus(Status.Incomplete);
-  }
+  constructor(private service: TasksService, private toastCtrl: ToastController) { }
 
   private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
@@ -54,6 +52,10 @@ export class TodoPage implements OnInit {
     
     this.service.updateTask(todo);
     this.showToast(msg);
+  }
+
+  ionViewWillEnter() {
+    this.todoList = this.service.getTasksByStatus(Status.Incomplete);
   }
 
   ngOnInit() { }

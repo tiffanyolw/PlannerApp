@@ -15,9 +15,7 @@ export class GoalsPage implements OnInit {
 
   goalsList: Goal[] = [];
 
-  constructor(private service: GoalsService, private toastCtrl: ToastController) {
-    this.goalsList = service.getGoalsByStatus(Status.Incomplete);
-  }
+  constructor(private service: GoalsService, private toastCtrl: ToastController) { }
 
   private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
@@ -51,9 +49,13 @@ export class GoalsPage implements OnInit {
       goal.endDate = new Date(Date.now());
       msg = "Goal has been marked as complete.";
     }
-    
+
     this.service.updateGoal(goal);
     this.showToast(msg);
+  }
+
+  ionViewWillEnter() {
+    this.goalsList = this.service.getGoalsByStatus(Status.Incomplete);
   }
 
   ngOnInit() {

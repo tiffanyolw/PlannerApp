@@ -7,9 +7,9 @@ import { Status } from '../interfaces/Status';
 })
 export class TasksService {
   todoList: Task[] = [
-    { name: "Running", description: "running around the block", startDate: new Date(), endDate: new Date(2020, 9, 9), status: Status.Incomplete },
-    { name: "Running2", description: "running around the block2", startDate: new Date(), endDate: new Date(2015, 5, 5), status: Status.Incomplete },
-    { name: "Running3", description: "running around the block3", startDate: new Date(), endDate: new Date(2017, 2, 2), status: Status.Complete },
+    { id: 1, name: "Running", description: "running around the block", startDate: new Date(), endDate: new Date(2020, 9, 9), status: Status.Incomplete },
+    { id: 2, name: "Running2", description: "running around the block2", startDate: new Date(), endDate: new Date(2015, 5, 5), status: Status.Incomplete },
+    { id: 3, name: "Running3", description: "running around the block3", startDate: new Date(), endDate: new Date(2017, 2, 2), status: Status.Complete },
   ];
 
   constructor() { }

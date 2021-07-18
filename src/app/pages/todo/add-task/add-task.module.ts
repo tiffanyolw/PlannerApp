@@ -8,6 +8,7 @@ import { AddTaskPageRoutingModule } from './add-task-routing.module';
 
 import { AddTaskPage } from './add-task.page';
 import { SubpageHeaderbarComponent } from 'src/app/components/subpage-headerbar/subpage-headerbar.component';
+import { AddPlanFormComponent } from 'src/app/components/add-plan-form/add-plan-form.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SubpageHeaderbarComponent } from 'src/app/components/subpage-headerbar/
     AddTaskPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AddTaskPage, SubpageHeaderbarComponent]
+  declarations: [AddTaskPage, SubpageHeaderbarComponent, AddPlanFormComponent]
 })
 export class AddTaskPageModule {}

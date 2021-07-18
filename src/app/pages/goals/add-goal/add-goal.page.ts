@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { convertDateTime } from 'src/app/functions/date';
 import { Goal } from 'src/app/interfaces/goal';
 import { GoalsService } from 'src/app/services/goals.service';
 
@@ -12,17 +10,9 @@ import { GoalsService } from 'src/app/services/goals.service';
 })
 export class AddGoalPage implements OnInit {
   title: string = "Add Goal";
-  addGoalForm: FormGroup = this.builder.group({
-    name: ["", [Validators.required]],
-    description: ["", [Validators.required]],
-    startDate: ["", [Validators.required]],
-    startTime: ["", [Validators.required]],
-    endDate: [""],
-    endTime: [""],
-    status: ["Incomplete", [Validators.required]]
-  });
+  newGoal: Goal;
 
-  constructor(private service: GoalsService, private builder: FormBuilder, private toastCtrl: ToastController) { }
+  constructor(private service: GoalsService, private toastCtrl: ToastController) { }
 
   private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
@@ -34,22 +24,11 @@ export class AddGoalPage implements OnInit {
   }
 
   onSubmit() {
-    const form = this.addGoalForm.value;
-    const newGoal: Goal = {
-      name: form.name,
-      description: form.description,
-      startDate: convertDateTime(form.startDate, form.startTime),
-      endDate: convertDateTime(form.endDate, form.endTime),
-      status: form.status
-    };
-
-    this.service.addGoal(newGoal).subscribe(() => {
+    this.service.addGoal(this.newGoal).subscribe(() => {
       this.showToast("Goal successfully added");
     }, () => {
       this.showToast("Error: Goal could not be added");
     });
-
-    this.addGoalForm.reset();
   }
 
   ngOnInit() {

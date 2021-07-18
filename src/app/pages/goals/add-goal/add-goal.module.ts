@@ -8,6 +8,7 @@ import { AddGoalPageRoutingModule } from './add-goal-routing.module';
 
 import { AddGoalPage } from './add-goal.page';
 import { SubpageHeaderbarComponent } from 'src/app/components/subpage-headerbar/subpage-headerbar.component';
+import { AddPlanFormComponent } from 'src/app/components/add-plan-form/add-plan-form.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SubpageHeaderbarComponent } from 'src/app/components/subpage-headerbar/
     AddGoalPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AddGoalPage, SubpageHeaderbarComponent]
+  declarations: [AddGoalPage, SubpageHeaderbarComponent, AddPlanFormComponent]
 })
 export class AddGoalPageModule {}

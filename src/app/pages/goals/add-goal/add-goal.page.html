@@ -3,45 +3,5 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="addGoalForm">
-    <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input formControlName="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Description</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label>Start Date</ion-label>
-      <ion-datetime formControlName="startDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Start Time</ion-label>
-      <ion-datetime displayFormat="h:mm a" formControlName="startTime"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>End Date</ion-label>
-      <ion-datetime formControlName="endDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>End Time</ion-label>
-      <ion-datetime displayFormat="h:mm a" formControlName="endTime"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label>Status</ion-label>
-      <ion-select formControlName="status">
-        <ion-select-option value="Incomplete">
-          Incomplete
-        </ion-select-option>
-        <ion-select-option [disabled]="addGoalForm.value.endDate === '' || addGoalForm.value.endTime === ''"
-          value="Complete">
-          Complete
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-button (click)="onSubmit()" [disabled]="addGoalForm.invalid" routerLink="/goals">Submit</ion-button>
-  </form>
-
+  <app-add-plan-form (sendForm)="newGoal=$event; onSubmit();"></app-add-plan-form>
 </ion-content>

@@ -26,19 +26,31 @@ export class TodoPage implements OnInit {
     toast.present();
   }
 
+  private showTasks() {
+    if (this.showAll) {
+      this.service.getTasks().subscribe((result) => {
+        this.todoList = result;
+      }, (err) => {
+        console.log(err);
+      });
+    } else {
+      this.service.getTasksByStatus(Status.Incomplete).subscribe((result) => {
+        this.todoList = result;
+      }, (err) => {
+        console.log(err);
+      });
+    }
+  }
+
   toggleShowAll() {
     this.showAll = !this.showAll;
-    if (this.showAll) {
-      this.todoList = this.service.getTasks();
-    } else {
-      this.todoList = this.service.getTasksByStatus(Status.Incomplete);
-    }
+    this.showTasks();
   }
 
   isCompleted(todo: Task): boolean {
     return todo.status === Status.Complete;
   }
-  
+
   toggleStatus(todo: Task) {
     let msg = "";
     if (todo.status === Status.Complete) {
@@ -49,13 +61,16 @@ export class TodoPage implements OnInit {
       todo.endDate = new Date(Date.now());
       msg = "Task has been marked as complete.";
     }
-    
-    this.service.updateTask(todo);
-    this.showToast(msg);
+
+    this.service.updateTask(todo.id, todo).subscribe(() => {
+      this.showToast(msg);
+    }, () => {
+      this.showToast("Could not update status");
+    });
   }
 
   ionViewWillEnter() {
-    this.todoList = this.service.getTasksByStatus(Status.Incomplete);
+    this.showTasks();
   }
 
   ngOnInit() { }

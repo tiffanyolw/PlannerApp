@@ -1,25 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Importance, Note } from '../interfaces/note';
+import { Observable } from 'rxjs';
+import { Note } from '../interfaces/note';
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  notesList: Note[] = [
-    { id:1, name: "Note 1", header: "first note", details: "this is the first note", importance: Importance.NotImportant},
-    { id:2, name: "Note 2", header: "second note", details: "this is the second note", importance: Importance.VeryImportant},
-    { id:3, name: "Note 3", header: "third note", details: "this is the third note", importance: Importance.Important},
-  ];
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  getNotes(): Note[] {
-    return this.notesList;
+  getNotes(): Observable<Note[]> {
+    return this.http.get<Note[]>(`${environment.apiUrl}/notes`);
   }
 
-  addNote(note: Note): boolean {
-    this.notesList.push(note);
-    return true;
-    // return false if db couldn't add
+  addNote(body: Note): Observable<Object> {
+    return this.http.post(`${environment.apiUrl}/notes/create`, body);
   }
 }

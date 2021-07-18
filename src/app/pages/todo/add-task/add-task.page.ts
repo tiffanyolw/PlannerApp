@@ -43,12 +43,11 @@ export class AddTaskPage implements OnInit {
       status: form.status
     };
 
-    const added = this.service.addTask(newTask);
-    if (added) {
+    this.service.addTask(newTask).subscribe(() => {
       this.showToast("Task successfully added");
-    } else {
+    }, () => {
       this.showToast("Failure: Task could not be added");
-    }
+    });
 
     this.addTaskForm.reset();
   }

@@ -1,1 +1,2 @@
 - update and edit tasks, goals, and notes
+- handle db error responses (instead of console.log show an error message)

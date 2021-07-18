@@ -13,8 +13,12 @@ export class NotesPage implements OnInit {
 
   constructor(private service: NotesService) { }
 
-  ionWillEnterView() {
-    this.notesList = this.service.getNotes();
+  ionViewWillEnter() {
+    this.service.getNotes().subscribe((result) => {
+      this.notesList = result;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   ngOnInit() {

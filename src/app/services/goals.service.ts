@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Goal } from '../interfaces/goal';
 import { Status } from '../interfaces/Status';
 
@@ -6,39 +9,22 @@ import { Status } from '../interfaces/Status';
   providedIn: 'root'
 })
 export class GoalsService {
-  goalsList: Goal[] = [
-    { id:1, name: "goal 1", description: "this is the first goal", startDate: new Date(), endDate: new Date(2021, 1, 3), status: Status.Incomplete },
-    { id:2, name: "goal 2", description: "this is the second goal", startDate: new Date(), endDate: new Date(2017, 2, 4), status: Status.Complete },
-    { id:3, name: "goal 3", description: "this is the third goal", startDate: new Date(), endDate: new Date(2019, 4, 6), status: Status.Incomplete }
-  ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getGoals(): Goal[] {
-    return this.goalsList;
+  getGoals(): Observable<Goal[]> {
+    return this.http.get<Goal[]>(`${environment.apiUrl}/goals`);
   }
 
-  getGoalsByStatus(status: Status): Goal[] {
-    let list = [];
-    this.goalsList.forEach((goal) => {
-      if (goal.status === status) {
-        list.push(goal);
-      }
-    });
-    return list;
+  getGoalsByStatus(status: Status): Observable<Goal[]> {
+    return this.http.get<Goal[]>(`${environment.apiUrl}/goals/filter?status=${status}`);
   }
 
-  addGoal(goal: Goal): boolean {
-    this.goalsList.push(goal);
-    return true;
-    // return false if db couldn't add
+  addGoal(body: Goal): Observable<Object> {
+    return this.http.post(`${environment.apiUrl}/goals/create`, body);
   }
 
-  updateGoal(goal: Goal) {
-    const index = this.goalsList.findIndex((obj) => {
-      return obj.id === goal.id;
-    });
-
-    this.goalsList[index] = goal;
+  updateGoal(id: number, body: Goal) {
+    return this.http.put(`${environment.apiUrl}/goals/update/id/${id}`, body);
   }
 }

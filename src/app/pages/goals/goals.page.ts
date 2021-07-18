@@ -26,13 +26,25 @@ export class GoalsPage implements OnInit {
     toast.present();
   }
 
+  private showGoals() {
+    if (this.showAll) {
+      this.service.getGoals().subscribe((result) => {
+        this.goalsList = result;
+      }, (err) => {
+        console.log(err);
+      });
+    } else {
+      this.service.getGoalsByStatus(Status.Incomplete).subscribe((result) => {
+        this.goalsList = result;
+      }, (err) => {
+        console.log(err);
+      });
+    }
+  }
+
   toggleShowAll() {
     this.showAll = !this.showAll;
-    if (this.showAll) {
-      this.goalsList = this.service.getGoals();
-    } else {
-      this.goalsList = this.service.getGoalsByStatus(Status.Incomplete);
-    }
+    this.showGoals();
   }
 
   isCompleted(goal: Goal): boolean {
@@ -50,12 +62,15 @@ export class GoalsPage implements OnInit {
       msg = "Goal has been marked as complete.";
     }
 
-    this.service.updateGoal(goal);
-    this.showToast(msg);
+    this.service.updateGoal(goal.id, goal).subscribe(() => {
+      this.showToast(msg);
+    }, () => {
+      this.showToast("Could not update status");
+    });
   }
 
   ionViewWillEnter() {
-    this.goalsList = this.service.getGoalsByStatus(Status.Incomplete);
+    this.showGoals();
   }
 
   ngOnInit() {

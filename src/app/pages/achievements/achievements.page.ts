@@ -15,6 +15,12 @@ export class AchievementsPage implements OnInit {
 
   constructor(private tasksService: TasksService, private goalsService: GoalsService) { }
 
+  private sortDesc() {
+    this.achievements.sort((obj1, obj2) => {
+      return obj2.endDate - obj1.endDate;
+    });
+  }
+
   isTask(item): boolean {
     return item.type === AchievementType.Task;
   }
@@ -23,20 +29,30 @@ export class AchievementsPage implements OnInit {
     return item.type === AchievementType.Goal;
   }
 
-  ionWillEnterView() {
-    let tasks: any = this.tasksService.getTasksByStatus(Status.Complete);
-    let goals: any = this.goalsService.getGoalsByStatus(Status.Complete);
-    tasks.forEach((task) => {
-      task.type = AchievementType.Task;
+  ionViewWillEnter() {
+    let tasks = [];
+    let goals = [];
+    this.tasksService.getTasksByStatus(Status.Complete).subscribe((result) => {
+      tasks = result;
+      tasks.forEach((task) => {
+        task.type = AchievementType.Task;
+      });
+      
+      this.achievements = [...this.achievements, ...tasks];
+      this.sortDesc();
+    }, (err) => {
+      console.log(err);
     });
-    goals.forEach((goal) => {
-      goal.type = AchievementType.Goal;
-    });
+    this.goalsService.getGoalsByStatus(Status.Complete).subscribe((result) => {
+      goals = result;
+      goals.forEach((goal) => {
+        goal.type = AchievementType.Goal;
+      });
 
-
-    this.achievements = [...tasks, ...goals];
-    this.achievements.sort((obj1, obj2) => {
-      return obj2.endDate - obj1.endDate;
+      this.achievements = [...this.achievements, ...goals];
+      this.sortDesc();
+    }, (err) => {
+      console.log(err);
     });
   }
 

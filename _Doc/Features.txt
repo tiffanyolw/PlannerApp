@@ -3,6 +3,7 @@ TODO:
 - once checked, navigate off and back on will show task gone
 - when checked, end date is set to current day and time
 - show all toggle to show all tasks or only the incomplete tasks
+- show all > add task > close > will still show all
 - Will only show "to" date if the task is completed
 - Toast marking complete and incomplete
 

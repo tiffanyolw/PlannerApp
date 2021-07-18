@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Task } from 'src/app/interfaces/task';
-import { Status } from 'src/app/interfaces/Status';
+import { Status } from 'src/app/interfaces/plan';
 import { TasksService } from 'src/app/services/Tasks.service';
 
 @Component({

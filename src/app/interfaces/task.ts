@@ -1,6 +1,6 @@
-import { Status } from "./Status";
+import { Plan, Status } from "./plan";
 
-export interface Task {
+export interface Task extends Plan{
     id?: number;
     name: string;
     description: string;

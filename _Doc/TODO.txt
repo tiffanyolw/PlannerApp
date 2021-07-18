@@ -1,2 +1,1 @@
-- Make end date automatically update when checked
-- ? if status is complete make end date required otherwise don't ?
+- update and edit tasks, goals, and notes

@@ -11,8 +11,10 @@ export class NotesPage implements OnInit {
   title: string = "Notes";
   notesList: Note[] = [];
 
-  constructor(private service: NotesService) {
-    this.notesList = service.getNotes();
+  constructor(private service: NotesService) { }
+
+  ionWillEnterView() {
+    this.notesList = this.service.getNotes();
   }
 
   ngOnInit() {

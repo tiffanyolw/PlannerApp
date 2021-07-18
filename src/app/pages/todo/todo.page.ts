@@ -11,12 +11,11 @@ import { TasksService } from 'src/app/services/Tasks.service';
 })
 export class TodoPage implements OnInit {
   title: String = "To Do";
+  showAll: boolean = false;
 
   todoList: Task[] = [];
 
-  constructor(private service: TasksService, private toastCtrl: ToastController) {
-    this.todoList = service.getTasks();
-  }
+  constructor(private service: TasksService, private toastCtrl: ToastController) { }
 
   private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
@@ -25,6 +24,15 @@ export class TodoPage implements OnInit {
     });
 
     toast.present();
+  }
+
+  toggleShowAll() {
+    this.showAll = !this.showAll;
+    if (this.showAll) {
+      this.todoList = this.service.getTasks();
+    } else {
+      this.todoList = this.service.getTasksByStatus(Status.Incomplete);
+    }
   }
 
   isCompleted(todo: Task): boolean {
@@ -38,10 +46,16 @@ export class TodoPage implements OnInit {
       msg = "Task has been marked as incomplete.";;
     } else {
       todo.status = Status.Complete;
+      todo.endDate = new Date(Date.now());
       msg = "Task has been marked as complete.";
     }
-
+    
+    this.service.updateTask(todo);
     this.showToast(msg);
+  }
+
+  ionViewWillEnter() {
+    this.todoList = this.service.getTasksByStatus(Status.Incomplete);
   }
 
   ngOnInit() { }

@@ -3,12 +3,17 @@
 </ion-header>
 
 <ion-content>
+    <ion-item lines="none">
+        <ion-label>Show All</ion-label>
+        <ion-toggle slot="start" [checked]="showAll" (ionChange)="toggleShowAll()"></ion-toggle>
+    </ion-item>
+
     <ion-list lines="full">
         <ion-item *ngFor="let task of todoList">
             <ion-label [class.completed]="isCompleted(task)" text-wrap>
                 <h2>{{ task.name }}</h2>
                 <h4>From: {{ task.startDate | date:"MMM d, y h:mm a" }}</h4>
-                <h4>To: {{ task.endDate | date:"MMM d, y h:mm a" }}</h4>
+                <h4 *ngIf="isCompleted(task)">To: {{ task.endDate | date:"MMM d, y h:mm a" }}</h4>
                 <p>{{ task.description }}</p>
             </ion-label>
             <ion-checkbox slot="start" color="primary" [checked]="isCompleted(task)" (ionChange)="toggleStatus(task)">

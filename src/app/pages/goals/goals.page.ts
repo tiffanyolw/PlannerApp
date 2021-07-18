@@ -11,12 +11,11 @@ import { GoalsService } from 'src/app/services/goals.service';
 })
 export class GoalsPage implements OnInit {
   title: string = "Goals";
+  showAll: boolean = false;
 
   goalsList: Goal[] = [];
 
-  constructor(private service: GoalsService, private toastCtrl: ToastController) {
-    this.goalsList = service.getGoals();
-  }
+  constructor(private service: GoalsService, private toastCtrl: ToastController) { }
 
   private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
@@ -25,6 +24,15 @@ export class GoalsPage implements OnInit {
     });
 
     toast.present();
+  }
+
+  toggleShowAll() {
+    this.showAll = !this.showAll;
+    if (this.showAll) {
+      this.goalsList = this.service.getGoals();
+    } else {
+      this.goalsList = this.service.getGoalsByStatus(Status.Incomplete);
+    }
   }
 
   isCompleted(goal: Goal): boolean {
@@ -38,10 +46,16 @@ export class GoalsPage implements OnInit {
       msg = "Goal has been marked as incomplete.";;
     } else {
       goal.status = Status.Complete;
+      goal.endDate = new Date(Date.now());
       msg = "Goal has been marked as complete.";
     }
 
+    this.service.updateGoal(goal);
     this.showToast(msg);
+  }
+
+  ionViewWillEnter() {
+    this.goalsList = this.service.getGoalsByStatus(Status.Incomplete);
   }
 
   ngOnInit() {

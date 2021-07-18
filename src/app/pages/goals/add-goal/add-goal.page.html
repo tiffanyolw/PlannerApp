@@ -31,8 +31,13 @@
     <ion-item>
       <ion-label>Status</ion-label>
       <ion-select formControlName="status">
-        <ion-select-option value="Incomplete">Incomplete</ion-select-option>
-        <ion-select-option value="Complete">Complete</ion-select-option>
+        <ion-select-option value="Incomplete">
+          Incomplete
+        </ion-select-option>
+        <ion-select-option [disabled]="addGoalForm.value.endDate === '' || addGoalForm.value.endTime === ''"
+          value="Complete">
+          Complete
+        </ion-select-option>
       </ion-select>
     </ion-item>
 

@@ -17,8 +17,8 @@ export class AddTaskPage implements OnInit {
     description: ["", [Validators.required]],
     startDate: ["", [Validators.required]],
     startTime: ["", [Validators.required]],
-    endDate: ["", [Validators.required]],
-    endTime: ["", [Validators.required]],
+    endDate: [""],
+    endTime: [""],
     status: ["Incomplete", [Validators.required]]
   });
 

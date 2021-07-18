@@ -13,9 +13,19 @@ export class AchievementsPage implements OnInit {
 
   achievements = [];
 
-  constructor(private tasksService: TasksService, private goalsService: GoalsService) {
-    let tasks: any = tasksService.getTasksByStatus(Status.Complete);
-    let goals: any = goalsService.getGoalsByStatus(Status.Complete);
+  constructor(private tasksService: TasksService, private goalsService: GoalsService) { }
+
+  isTask(item): boolean {
+    return item.type === AchievementType.Task;
+  }
+
+  isGoal(item): boolean {
+    return item.type === AchievementType.Goal;
+  }
+
+  ionWillEnterView() {
+    let tasks: any = this.tasksService.getTasksByStatus(Status.Complete);
+    let goals: any = this.goalsService.getGoalsByStatus(Status.Complete);
     tasks.forEach((task) => {
       task.type = AchievementType.Task;
     });
@@ -28,14 +38,6 @@ export class AchievementsPage implements OnInit {
     this.achievements.sort((obj1, obj2) => {
       return obj2.endDate - obj1.endDate;
     });
-  }
-
-  isTask(item): boolean {
-    return item.type === AchievementType.Task;
-  }
-
-  isGoal(item): boolean {
-    return item.type === AchievementType.Goal;
   }
 
   ngOnInit() {

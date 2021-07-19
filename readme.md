@@ -58,12 +58,14 @@ https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-locat
 
 # To Do
 - Video Diary and Images Diary
+- Achievements: Have a filter at the top to filter just tasks or goals OR Have a separate table in the DB so don't have to merge the lists in the client
 - Ability to update/edit a task, goal, or note
 - Ability to delete a task, goal, or note
   - Set a delete flag and show deleted items in a seperate list when user can permanently delete the item
 - Handle error responses from the API (instead of just console.log the error)
 - Create option to sort by
 - Save preferences
+- Theming
 
 ## Refactoring
 Branch: refactor

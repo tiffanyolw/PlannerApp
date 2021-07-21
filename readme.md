@@ -6,7 +6,7 @@
 5. `ionic cap run android` will run the app on an emulator/physical device
 
 # Fix Errors
-- If error with SDK location not found, add a file in android folder named `local.properties` and add `sdk.dir=C:\\Users\\Username\\AppData\\Local\\Android\\sdk` to the file
+- If error with SDK location not found, add a file in android folder named `local.properties` and add `sdk.dir=C:\\Users\\[Username]\\AppData\\Local\\Android\\sdk` to the file (replacing [Username] with the actual value)
 https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil
 
 # Info
